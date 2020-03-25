@@ -1,0 +1,64 @@
+﻿@model BarberShop.Entities.ServiceInVisit
+
+@{
+    ViewData["Title"] = "Добавить услугу";
+}
+
+
+<h4>Добавить услугу</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (ViewBag.Error != null)
+            {
+                <label style="color: #a94442;">@ViewBag.Error</label>
+            }
+                <div class="form-group">
+                    <label class="control-label">Выберите парикмахера</label>
+                    <select id="master" asp-for="MasterId" class="form-control" asp-items="ViewBag.Masters"></select>
+
+                    <span class="text-danger"></span>
+                </div>
+            <div class="form-group">
+                <label class="control-label">Выберите услугу</label>
+                <select id="serviceId" asp-for="ServiceId" class="form-control" asp-items="ViewBag.Services"></select>
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="hidden" asp-for="VisitId" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Добавить" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Get" class = "btn btn-primary" asp-route-visitId="@Model.VisitId">Вернуться к услугам</a>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+    $(function () {
+
+        $('#master').change(function()
+        {
+            // получаем выбранный id
+            var id = $(this).val();
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("GetServices", "ServicesInVisits")?id=' + id,
+                success: function (data) {
+
+                    // заменяем содержимое присланным частичным представлением
+                    $('#serviceId').replaceWith(data);
+                }
+            });
+        });
+        })
+    </script>
+}
+

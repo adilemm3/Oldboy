@@ -1,0 +1,39 @@
+﻿@model BarberShop.Entities.Client
+
+@{
+    ViewData["Title"] = "Изменить клиента";
+}
+
+
+<h4>Изменить клиента</h4>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Update">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (ViewBag.Error != null)
+            {
+                <label style="color: #a94442;">@ViewBag.Error</label>
+            }
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">ФИО</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label">Телефон</label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <input type="submit" value="Сохранить" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <h4><a asp-action="GetAll" class = "btn btn-primary">Вернуться обратно</a></h4>
+</div>
+

@@ -1,0 +1,55 @@
+﻿@model List<BarberShop.Entities.ServiceInVisit>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+
+<h2>Выбранные услуги</h2>
+
+<h4>
+    <a asp-action="Create" class="btn btn-primary" asp-route-visitId="@ViewBag.VisitId">Добавить услугу</a>
+</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <h4>Парикмахер</h4>
+            </th>
+            <th>
+                <h4>Услуга</h4>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MasterServices.Master.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MasterServices.Service.NameOfService)
+                </td>
+                <td>
+                    @if (ViewBag.Date > DateTime.Now)
+                    {
+                        <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.Id">Изменить</a>
+                        <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id">Удалить</a>
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<h5>Итоговая сумма: @ViewBag.TotalCost руб.</h5>
+<div>
+    @if (User.Claims.Count() != 0 && User.Claims.ElementAt(1).Value == "admin")
+    {
+        <a asp-action="GetAll" class="btn btn-primary" asp-controller="Visits">Вернуться к посещениям</a>
+    }
+    else
+    { 
+        <a asp-action="GetAll" class="btn btn-primary" asp-controller="Visits" asp-route-userName="@User.Claims.Last().Value">Вернуться к посещениям</a>
+    }
+</div>

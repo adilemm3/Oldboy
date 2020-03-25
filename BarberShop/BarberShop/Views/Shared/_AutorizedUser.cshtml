@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+
+<button style="background-color: #222;" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Привет @User.Claims.Last().Value!
+    
+    <span class="caret"></span>
+</button>
+<ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="        margin-right: 5%;
+        background-color: #222;
+        color: #9d9d9d;">
+    <li><a style="background-color: #222;
+    color: #9d9d9d;
+    text-align: center;" asp-area="" asp-controller="Account" asp-action="Edit" asp-route-Id="@User.Claims.First().Value">Изменить</a></li>
+</ul>
+
+<li>
+    <form style="padding-top: 8px;" asp-area="" asp-controller="Account" asp-action="Logout">
+        <button type="submit" class="nav-link btn btn-link text-dark">Выйти</button>
+    </form>
+</li>
+
+<style>
+    .dropdown-toggle{
+    padding-top: 14px;border-top-width: 1px;border: none;padding-bottom: 14px; color:#9d9d9d;
+    }
+    .dropdown-toggle:hover { color:#fff;}
+    .open > .dropdown-toggle.btn-default:focus{
+        color: #fff;
+    }
+</style>

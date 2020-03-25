@@ -1,0 +1,96 @@
+﻿@model List<BarberShop.Entities.Visit>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+
+@{
+    ViewData["Title"] = "Посещения";
+}
+
+@if (User.Claims.Count() == 0)
+{
+    <h4>
+        <a asp-action="NotAuthorizedUser" class="btn btn-primary">Добавить посещение</a>
+    </h4>
+}
+else
+{
+    <h4>
+        <a asp-action="Create" asp-route-name="@User.Claims.Last().Value" class="btn btn-primary">Добавить посещение</a>
+    </h4>
+
+}
+@if (User.Claims.Count() != 0 && User.Claims.ElementAt(1).Value == "admin")
+{
+    <form asp-action="GetAll" method="get">
+        <div class="form-inline form-group">
+            <label class="control-label">ФИО: </label>
+            <input id="userName" name="userName" class="form-control" />
+
+            <input type="submit" value="Фильтр" class="btn btn-default" />
+            <input type="submit" onclick="ClearFilter()" value="Очистить фильтр" class="btn btn-default" />
+        </div>
+    </form>
+}
+
+
+@if (ViewBag.Error != null)
+{
+    <label style="color: #a94442;">@ViewBag.Error</label>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <h4>Клиенты</h4>
+            </th>
+            <th>
+                <h4>Дата и время посещения</h4>
+            </th>
+            <th>
+                <h4>Итоговая сумма</h4>
+            </th>
+            @*<th>
+                    <h4>Есть посещение</h4>
+                </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            <tr>
+                <td>
+                    @Model[i].Client.Name
+                </td>
+                <td>
+                    @Model[i].DateOfVisit
+                </td>
+                <td>
+                    @Model[i].TotalCost руб.
+                </td>
+                <td>
+                    <a asp-action="Get" asp-controller="ServicesInVisits" asp-route-visitId="@Model[i].Id" class="btn btn-info">Услуги посещения</a>
+                    @if (@Model[i].DateOfVisit.Date >= DateTime.Now.Date & @Model[i].DateOfVisit.Hour > DateTime.Now.Hour + 1)
+                    {
+                        <a asp-action="Update" asp-route-visitId="@Model[i].Id" class="btn btn-warning">Изменить</a>
+                    }
+                    else if (User.Claims.Count() != 0 && User.Claims.ElementAt(1).Value == "admin")
+                    {
+                        <a asp-action="Update" asp-route-visitId="@Model[i].Id" class="btn btn-warning">Изменить</a>
+                    }
+                    @if (User.Claims.Count() != 0 && User.Claims.ElementAt(1).Value == "admin")
+                    {
+                        <a asp-action="Delete" class="btn btn-danger" asp-route-visitId="@Model[i].Id">Удалить</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    function ClearFilter() {
+        $('#userName').replaceWith('');
+    }
+</script>

@@ -1,0 +1,68 @@
+﻿@model IEnumerable<BarberShop.Entities.Master>
+@{
+    ViewData["Title"] = "Парикмахеры";
+}
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@if (User.Claims.Count() != 0 && User.Claims.ElementAt(1).Value == "admin")
+{
+    <h4><a asp-action="Create" class="btn btn-primary">Добавить парикмахера</a></h4>
+}
+<table class="table">
+    <tr>
+        <th>
+            <h4>ФИО</h4>
+        </th>
+        @if (User.Claims.Count() != 0 && User.Claims.ElementAt(1).Value == "admin")
+        {
+            <th>
+                <h4>Телефон</h4>
+            </th>
+            <th>
+                <h4>Пол</h4>
+            </th>
+            <th>
+                <h4>Email</h4>
+            </th>
+            <th>
+                <h4>Процент с оказания услуг</h4>
+            </th>
+        }
+
+        <th>
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            @if (User.Claims.Count() != 0 && User.Claims.ElementAt(1).Value == "admin")
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sex)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PercentForTheService)
+                </td>
+            }
+
+            <td>
+                <a asp-controller="MasterServices" asp-action="Get" class="btn btn-info" asp-route-masterId="@item.Id">Услуги парикмахера</a>
+                @if (User.Claims.Count() != 0 && User.Claims.ElementAt(1).Value == "admin")
+                {
+                    <a asp-action="Get" asp-route-masterId="@item.Id" class="btn btn-warning">Изменить</a>
+                }
+            </td>
+        </tr>
+    }
+</table>

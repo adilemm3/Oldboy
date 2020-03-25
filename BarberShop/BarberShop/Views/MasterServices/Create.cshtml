@@ -1,0 +1,34 @@
+﻿@model BarberShop.Entities.MasterServices
+
+@{
+    ViewData["Title"] = "Добавить услугу парикмахера";
+}
+<h4>Добавить услугу парикмахера</h4>
+<hr />
+<div class="row" style="margin-left: auto; margin-right: auto;">
+    <div class="col-lg-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="MasterId" />
+            @if (ViewBag.Error != null)
+            {
+                <label style="color: #a94442;">@ViewBag.Error</label>
+            }
+
+                <div class="form-group">
+                    <label class="control-label">Выберите услугу</label>
+                    <select id="service" asp-for="ServiceId" class="form-control" asp-items="ViewBag.Serviсes"></select>
+
+                    <span class="text-danger"></span>
+                </div>
+            <div class="form-group">
+                <input type="submit" value="Добавить" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Get" class="btn btn-primary" asp-route-masterId="@Model.MasterId">Вернуться к списку услуг парикмахера</a>
+</div>
+

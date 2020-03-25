@@ -1,0 +1,36 @@
+﻿@model BarberShop.Entities.Visit
+
+@{
+    ViewData["Title"] = "Добавить посещение";
+}
+
+<h4>Добавить посещение</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ClientId" class="control-label">@Model.Client.Name</label>
+                @*@Html.DropDownListFor(model => model.ClientId, ViewBag.Client as SelectList, new { @class = "form-control" })*@
+                @*<input asp-for="ClientId" value="@Model.Client.Name" class="form-control">*@
+                <input type="hidden" asp-for="Client" value="@Model.Client"/>
+                <input type="hidden" asp-for="ClientId" />
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfVisit" class="control-label">Дата посещения</label>
+                <input asp-for="DateOfVisit" value="@DateTime.Now" class="form-control" />
+                <span asp-validation-for="DateOfVisit" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Добавить" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="GetAll" class = "btn btn-primary">Вернуться к посещениям</a>
+</div>
+

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<BarberShop.Entities.MasterServices>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@{
+    ViewData["Title"] = "Услуги парикмахера";
+}
+
+<h4>@ViewBag.FullName</h4>
+@if (User.Claims.Count() != 0 && User.Claims.ElementAt(1).Value == "admin")
+{
+    <div>
+        @Html.ActionLink("Добавить услугу парикмахера", "Create", new { masterId = ViewBag.MasterId }, new { @class = "btn btn-primary" })
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                <h4>Услуги</h4>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Service.NameOfService)
+                </td>
+                @if (User.Claims.Count() != 0 && User.Claims.ElementAt(1).Value == "admin")
+                {
+                    <td>
+                        @Html.ActionLink("Изменить", "Edit", new { masterId = item.Master.Id, serviceId = item.Service.Id }, new { @class = "btn btn-warning" })
+                        @Html.ActionLink("Удалить", "Delete", new { masterId = item.Master.Id, serviceId = item.Service.Id }, new { @class = "btn btn-danger" })
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="GetAll" class="btn btn-primary" asp-controller="Masters">Вернуться к списку парикмахеров</a>
+</div>

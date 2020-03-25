@@ -1,0 +1,15 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+    <ul class="nav navbar-nav navbar-right">
+
+        @if (User.Identity.Name != null)
+        {
+        <partial name="_AutorizedUser" />
+        }
+        else
+        {
+            <li><a asp-area="" asp-controller="Account" asp-action="Register">Регистрация</a></li>
+            <li><a asp-area="" asp-controller="Account" asp-action="Login">Войти</a></li>
+        }
+    </ul>
+

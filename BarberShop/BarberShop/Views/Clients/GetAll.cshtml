@@ -1,0 +1,51 @@
+﻿@model IEnumerable<BarberShop.Entities.Client>
+
+@{
+    ViewData["Title"] = "Клиенты";
+}
+<h4><a asp-action="Create" class = "btn btn-primary">Добавить клиента</a></h4>
+
+<form asp-action="GetAll" method="get">
+    <div class="form-inline form-group">
+        <label class="control-label">ФИО: </label>
+        <input name="name" class="form-control" />
+
+        <label class="control-label">Телефон </label>
+        <input name="phone" class="form-control" />
+
+
+        <input type="submit" value="Фильтр" class="btn btn-default" />
+        <input type="submit" value="Очистить фильтр" class="btn btn-default" />
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <h4>ФИО</h4>
+            </th>
+            <th>
+                <h4>Телефон</h4>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.ActionLink("Изменить", "Update", new { clientId = item.Id },new { @class = "btn btn-warning" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

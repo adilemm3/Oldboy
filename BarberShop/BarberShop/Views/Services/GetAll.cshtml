@@ -1,0 +1,41 @@
+﻿@model IEnumerable<BarberShop.Entities.Service>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@if (User.Claims.Count() != 0 && User.Claims.ElementAt(1).Value == "admin")
+{
+   // <h4><a asp-action="Create" class="btn btn-primary">Добавить парикмахера</a></h4>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <h4>Услуги</h4>
+            </th>
+            <th>
+                <h4>Цена</h4>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameOfService)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                @if (User.Claims.Count() != 0 && User.Claims.ElementAt(1).Value == "admin")
+                {
+                    <td>
+                        <a asp-action="Edit" class="btn btn-warning" asp-route-serviceId="@item.Id">Изменить цену</a>
+                    </td>
+                }
+
+            </tr>
+        }
+    </tbody>
+</table>
