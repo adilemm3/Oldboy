@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "bootstrap/3.3.7": {
+      "bootstrap/3.4.1": {
         "type": "package",
         "dependencies": {
           "jQuery": "[1.9.1, 4.0.0)"
@@ -2643,14 +2643,15 @@
     }
   },
   "libraries": {
-    "bootstrap/3.3.7": {
-      "sha512": "3YTWhPNh6UcnUvzw9u6A2/hy2w0h4lznxPbX6FY47lFia3+Ib4zBixTpW6YieYA/b2fLXbkjoD59OjcVF3cJXw==",
+    "bootstrap/3.4.1": {
+      "sha512": "rnqnZV4sFAgB240hnLRwqoUaV2DfzrYsc6PbsYzRTObrrucLZyvb+8F1yTVT1sDbXMi/NXlyRmiL6wF+d4ZJMA==",
       "type": "package",
-      "path": "bootstrap/3.3.7",
+      "path": "bootstrap/3.4.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "bootstrap.3.3.7.nupkg.sha512",
+        "LICENSE.txt",
+        "bootstrap.3.4.1.nupkg.sha512",
         "bootstrap.nuspec",
         "content/Content/bootstrap-theme.css",
         "content/Content/bootstrap-theme.css.map",
@@ -2666,7 +2667,22 @@
         "content/fonts/glyphicons-halflings-regular.svg",
         "content/fonts/glyphicons-halflings-regular.ttf",
         "content/fonts/glyphicons-halflings-regular.woff",
-        "content/fonts/glyphicons-halflings-regular.woff2"
+        "content/fonts/glyphicons-halflings-regular.woff2",
+        "contentFiles/Content/bootstrap-theme.css",
+        "contentFiles/Content/bootstrap-theme.css.map",
+        "contentFiles/Content/bootstrap-theme.min.css",
+        "contentFiles/Content/bootstrap-theme.min.css.map",
+        "contentFiles/Content/bootstrap.css",
+        "contentFiles/Content/bootstrap.css.map",
+        "contentFiles/Content/bootstrap.min.css",
+        "contentFiles/Content/bootstrap.min.css.map",
+        "contentFiles/Scripts/bootstrap.js",
+        "contentFiles/Scripts/bootstrap.min.js",
+        "contentFiles/fonts/glyphicons-halflings-regular.eot",
+        "contentFiles/fonts/glyphicons-halflings-regular.svg",
+        "contentFiles/fonts/glyphicons-halflings-regular.ttf",
+        "contentFiles/fonts/glyphicons-halflings-regular.woff",
+        "contentFiles/fonts/glyphicons-halflings-regular.woff2"
       ]
     },
     "jQuery/1.9.1": {
@@ -8529,7 +8545,7 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 3.1.2",
       "Microsoft.EntityFrameworkCore.Tools >= 3.1.2",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.1",
-      "bootstrap >= 3.3.7"
+      "bootstrap >= 3.4.1"
     ]
   },
   "packageFolders": {
@@ -8607,7 +8623,7 @@
           },
           "bootstrap": {
             "target": "Package",
-            "version": "[3.3.7, )"
+            "version": "[3.4.1, )"
           }
         },
         "imports": [
