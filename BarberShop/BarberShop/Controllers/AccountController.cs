@@ -71,7 +71,7 @@ namespace BarberShop.Controllers
                 if (user != null)
                 {
                     await Authenticate(user); // аутентификация
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("GetAll", "Visits", new {userName =user.FullName  });
                 }
                 ModelState.AddModelError("", "Некорректные логин и(или) пароль");
             }

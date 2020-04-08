@@ -91,6 +91,10 @@ namespace BarberShop.Controllers
         {
             var visit = new Visit();
             visit.Client = _clientCrudService.GetAll().FirstOrDefault(x => x.Name == name);
+            if (visit.Client == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             visit.ClientId = visit.Client.Id;
             //ViewBag.Client = new SelectList(_clientCrudService.GetAll(), "Id", "Name");
             return View(visit);
